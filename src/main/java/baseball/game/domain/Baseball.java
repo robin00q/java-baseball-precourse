@@ -1,6 +1,6 @@
-package baseball.baseball.domain;
+package baseball.game.domain;
 
-import baseball.baseball.errors.BaseballErrors;
+import baseball.game.errors.BaseballErrors;
 
 public class Baseball {
 

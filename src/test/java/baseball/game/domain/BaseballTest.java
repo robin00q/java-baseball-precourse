@@ -1,9 +1,9 @@
-package baseball.baseball.domain;
+package baseball.game.domain;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import baseball.baseball.errors.BaseballErrors;
+import baseball.game.errors.BaseballErrors;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;

@@ -1,9 +1,9 @@
-package baseball.baseball.domain;
+package baseball.game.domain;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import baseball.baseball.errors.BaseballErrors;
+import baseball.game.errors.BaseballErrors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

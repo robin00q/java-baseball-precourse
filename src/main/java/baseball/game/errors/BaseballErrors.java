@@ -1,4 +1,4 @@
-package baseball.baseball.errors;
+package baseball.game.errors;
 
 public class BaseballErrors {
 
