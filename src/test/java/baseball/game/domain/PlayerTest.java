@@ -24,7 +24,7 @@ class PlayerTest {
     @Test
     void player_creation_test() {
         // given
-        Baseballs baseballs = new Baseballs(new Baseball(4), new Baseball(5), new Baseball(6));
+        Baseballs baseballs = new Baseballs(4, 5, 6);
 
         // when, then
         assertThatCode(() -> new Player(baseballs)).doesNotThrowAnyException();

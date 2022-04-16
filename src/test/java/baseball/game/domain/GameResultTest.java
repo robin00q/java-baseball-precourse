@@ -24,12 +24,12 @@ class GameResultTest {
     static Stream<Arguments> invalid_game_result_creation_parameter() {
         return Stream.of(
                 Arguments.of(
-                        new Player(new Baseballs(new Baseball(1), new Baseball(2), new Baseball(3))),
+                        new Player(new Baseballs(1, 2, 3)),
                         null,
                         GameResultErrors.GAME_RESULT_REQUIRE_COMPUTER),
                 Arguments.of(
                         null,
-                        new Computer(new Baseballs(new Baseball(1), new Baseball(2), new Baseball(3))),
+                        new Computer(new Baseballs(1, 2, 3)),
                         GameResultErrors.GAME_RESULT_REQUIRE_PLAYER));
     }
 

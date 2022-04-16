@@ -24,7 +24,7 @@ class ComputerTest {
     @Test
     void computer_creation_test() {
         // given
-        Baseballs baseballs = new Baseballs(new Baseball(1), new Baseball(2), new Baseball(3));
+        Baseballs baseballs = new Baseballs(1, 2, 3);
 
         // when, then
         assertThatCode(() -> new Computer(baseballs)).doesNotThrowAnyException();

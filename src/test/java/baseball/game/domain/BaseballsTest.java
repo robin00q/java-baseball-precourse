@@ -15,31 +15,30 @@ class BaseballsTest {
 
     @ParameterizedTest(name = "Baseballs 객체 생성 위반")
     @MethodSource(value = "invalid_baseballs_creation_parameter")
-    void invalid_baseballs_creation(Baseball ball1, Baseball ball2, Baseball ball3) {
+    void invalid_baseballs_creation(int ball1, int ball2, int ball3) {
         // given: none
 
         // when, then
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Baseballs(ball1, ball2, ball3))
-                .withMessageStartingWith(BaseballErrors.INVALID_BASEBALLS_PREFIX)
-                .withMessageEndingWith(BaseballErrors.INVALID_BASEBALLS_POSTFIX);
+                .withMessageStartingWith(BaseballErrors.INVALID_BASEBALL_PREFIX);
     }
 
     static Stream<Arguments> invalid_baseballs_creation_parameter() {
         return Stream.of(
-                Arguments.of(new Baseball(1), new Baseball(2), null),
-                Arguments.of(new Baseball(1), null, new Baseball(3)),
-                Arguments.of(null, new Baseball(2), new Baseball(3)),
-                Arguments.of(null, null, null));
+                Arguments.of(0, 1, 2),
+                Arguments.of(1, 2, 10),
+                Arguments.of(0, 0, 0),
+                Arguments.of(10, 10, 10));
     }
 
     @DisplayName("Baseballs 객체 생성 정상케이스")
     @Test
     void valid_baseball_creation() {
         // given
-        Baseball ball1 = new Baseball(1);
-        Baseball ball2 = new Baseball(2);
-        Baseball ball3 = new Baseball(5);
+        int ball1 = 1;
+        int ball2 = 2;
+        int ball3 = 5;
 
         // when, then
         assertThatCode(() -> new Baseballs(ball1, ball2, ball3))
