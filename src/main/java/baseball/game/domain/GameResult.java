@@ -1,6 +1,7 @@
 package baseball.game.domain;
 
 import baseball.game.errors.GameResultErrors;
+import java.util.Objects;
 
 public class GameResult {
 
@@ -8,13 +9,21 @@ public class GameResult {
 
     private final int ballCount;
 
-    // TODO : implement constructor
-    public GameResult(Player player, Computer computer) {
+    private GameResult(Player player, Computer computer) {
         validatePlayer(player);
         validateComputer(computer);
 
-        strikeCount = 0;
-        ballCount = 0;
+        strikeCount = player.getBaseballs().getStrikeCount(computer.getBaseballs());
+        ballCount = player.getBaseballs().getBallCount(computer.getBaseballs());
+    }
+
+    public GameResult(int strikeCount, int ballCount) {
+        this.strikeCount = strikeCount;
+        this.ballCount = ballCount;
+    }
+
+    public static GameResult playAndGetGameResult(Player player, Computer computer) {
+        return new GameResult(player, computer);
     }
 
     private void validatePlayer(Player player) {
@@ -29,4 +38,20 @@ public class GameResult {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GameResult that = (GameResult) o;
+        return strikeCount == that.strikeCount && ballCount == that.ballCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strikeCount, ballCount);
+    }
 }

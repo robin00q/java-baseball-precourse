@@ -1,6 +1,8 @@
 package baseball.game.domain;
 
 import baseball.game.errors.BaseballErrors;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * VO for Baseballs (immutable)
@@ -38,5 +40,50 @@ public class Baseball {
             throw new IllegalArgumentException(BaseballErrors.INVALID_BASEBALL_POSITION_PREFIX +
                     MINIMUM_BASEBALL_NUMBER + BaseballErrors.INVALID_BASEBALL_POSITION_MAXIMUM_POSTFIX);
         }
+    }
+
+    public boolean isBallStatus(List<Baseball> anotherBaseballs) {
+        boolean isBall = false;
+
+        for (int i = 0 ; i < anotherBaseballs.size() ; i++) {
+            isBall = isBall || this.isSameBallButDifferentPosition(anotherBaseballs.get(i));
+        }
+
+        return isBall;
+    }
+
+    public boolean isStrikeStatus(List<Baseball> anotherBaseballs) {
+        boolean isStrike = false;
+
+        for (int i = 0 ; i < anotherBaseballs.size() ; i++) {
+            isStrike = isStrike || this.isSameBallAndSamePosition(anotherBaseballs.get(i));
+        }
+
+        return isStrike;
+    }
+
+    private boolean isSameBallButDifferentPosition(Baseball anotherBaseball) {
+        return this.number == anotherBaseball.number && this.position != anotherBaseball.position;
+    }
+
+    private boolean isSameBallAndSamePosition(Baseball anotherBaseball) {
+        return this.equals(anotherBaseball);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Baseball baseball = (Baseball) o;
+        return number == baseball.number && position == baseball.position;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, position);
     }
 }

@@ -1,5 +1,6 @@
 package baseball.game.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import baseball.game.errors.GameResultErrors;
@@ -17,7 +18,7 @@ class GameResultTest {
 
         // when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new GameResult(player, computer))
+                .isThrownBy(() -> GameResult.playAndGetGameResult(player, computer))
                 .withMessageMatching(errorMessages);
     }
 
@@ -31,6 +32,32 @@ class GameResultTest {
                         null,
                         new Computer(new Baseballs(1, 2, 3)),
                         GameResultErrors.GAME_RESULT_REQUIRE_PLAYER));
+    }
+
+    @ParameterizedTest(name = "플레이어와 컴퓨터가 게임을해서 결과를 반환한다.")
+    @MethodSource("play_and_get_game_result_parameter")
+    void play_and_get_game_result(Player player, Computer computer, GameResult expected) {
+        // given: none
+
+        // when, then
+        assertThat(GameResult.playAndGetGameResult(player, computer)).isEqualTo(expected);
+
+    }
+
+    static Stream<Arguments> play_and_get_game_result_parameter(){
+        return Stream.of(
+                Arguments.of(
+                        new Player(new Baseballs(1, 2, 3)),
+                        new Computer(new Baseballs(1, 2, 3)),
+                        new GameResult(3, 0)),
+                Arguments.of(
+                        new Player(new Baseballs(1, 2, 3)),
+                        new Computer(new Baseballs(2, 1, 3)),
+                        new GameResult(1, 2)),
+                Arguments.of(
+                        new Player(new Baseballs(4, 5, 6)),
+                        new Computer(new Baseballs(5, 6, 4)),
+                        new GameResult(0, 3)));
     }
 
 

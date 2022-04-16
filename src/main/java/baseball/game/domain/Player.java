@@ -16,4 +16,8 @@ public class Player {
             throw new IllegalArgumentException(PlayerErrors.PLAYER_REQUIRED_BASEBALLS);
         }
     }
+
+    public Baseballs getBaseballs() {
+        return baseballs;
+    }
 }

@@ -11,6 +11,10 @@ public class Computer {
         this.baseballs = baseballs;
     }
 
+    public Baseballs getBaseballs() {
+        return baseballs;
+    }
+
     private void validate(Baseballs baseballs) {
         if (baseballs == null) {
             throw new IllegalArgumentException(ComputerErrors.COMPUTER_REQUIRED_BASEBALLS);

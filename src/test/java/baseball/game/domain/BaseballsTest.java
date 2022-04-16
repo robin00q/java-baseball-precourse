@@ -1,5 +1,6 @@
 package baseball.game.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -43,5 +44,41 @@ class BaseballsTest {
         // when, then
         assertThatCode(() -> new Baseballs(ball1, ball2, ball3))
                 .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest(name = "야구공들 끼리 비교해서, strike count 를 가져온다.")
+    @MethodSource("compare_baseballs_and_get_strike_count_parameter")
+    void compare_baseballs_and_get_strike_count(Baseballs baseballs1, Baseballs baseballs2, int expectedStrikeCount) {
+        // given: none
+
+        // when, then
+        assertThat(baseballs1.getStrikeCount(baseballs2)).isEqualTo(expectedStrikeCount);
+    }
+
+    static Stream<Arguments> compare_baseballs_and_get_strike_count_parameter() {
+        return Stream.of(
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(1, 2, 3), 3),
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(1, 2, 4), 2),
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(1, 3, 4), 1),
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(4, 5, 6), 0)
+        );
+    }
+
+    @ParameterizedTest(name = "야구공들 끼리 비교해서, ball count 를 가져온다.")
+    @MethodSource("compare_baseballs_and_get_ball_count_parameter")
+    void compare_baseballs_and_get_ball_count(Baseballs baseballs1, Baseballs baseballs2, int expectedBallCount) {
+        // given: none
+
+        // when, then
+        assertThat(baseballs1.getBallCount(baseballs2)).isEqualTo(expectedBallCount);
+    }
+
+    static Stream<Arguments> compare_baseballs_and_get_ball_count_parameter() {
+        return Stream.of(
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(2, 3, 1), 3),
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(2, 3, 9), 2),
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(3, 8, 7), 1),
+                Arguments.of(new Baseballs(1, 2, 3), new Baseballs(4, 5, 6), 0)
+        );
     }
 }

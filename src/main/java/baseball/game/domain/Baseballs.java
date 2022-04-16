@@ -1,5 +1,7 @@
 package baseball.game.domain;
 
+import baseball.game.util.IncreasingInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,5 +18,33 @@ public class Baseballs {
                 new Baseball(ball1, FIRST_POSITION),
                 new Baseball(ball2, SECOND_POSITION),
                 new Baseball(ball3, THIRD_POSITION));
+    }
+
+    public int getStrikeCount(Baseballs anotherBaseballs) {
+        IncreasingInteger increasingInteger = IncreasingInteger.INITIAL_VALUE_ZERO;
+
+        for (int i = 0 ; i < baseballs.size() ; i++) {
+            Baseball baseball = baseballs.get(i);
+            increasingInteger = increasingInteger.increaseIfTrue(
+                    baseball.isStrikeStatus(anotherBaseballs.getAllBaseballs()));
+        }
+
+        return increasingInteger.getValue();
+    }
+
+    public int getBallCount(Baseballs anotherBaseballs) {
+        IncreasingInteger increasingInteger = IncreasingInteger.INITIAL_VALUE_ZERO;
+
+        for (int i = 0 ; i < baseballs.size() ; i++) {
+            Baseball baseball = baseballs.get(i);
+            increasingInteger = increasingInteger.increaseIfTrue(
+                    baseball.isBallStatus(anotherBaseballs.getAllBaseballs()));
+        }
+
+        return increasingInteger.getValue();
+    }
+
+    private List<Baseball> getAllBaseballs() {
+        return new ArrayList<>(baseballs);
     }
 }
