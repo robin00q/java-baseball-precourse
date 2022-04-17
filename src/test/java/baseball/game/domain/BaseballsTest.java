@@ -45,9 +45,7 @@ class BaseballsTest {
     static Stream<Arguments> invalid_baseballs_creation_parameter() {
         return Stream.of(
                 Arguments.of(0, 1, 2),
-                Arguments.of(1, 2, 10),
-                Arguments.of(0, 0, 0),
-                Arguments.of(10, 10, 10));
+                Arguments.of(1, 2, 10));
     }
 
     @DisplayName("Baseballs 객체 생성 정상케이스")
