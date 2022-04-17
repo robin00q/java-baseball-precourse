@@ -5,8 +5,8 @@ import baseball.game.domain.GameResult;
 import baseball.game.domain.RetryRule;
 import baseball.game.external.dto.ComputerThreeRandomNumberResponse;
 import baseball.game.service.command.PlayerCommand;
+import baseball.game.util.GamePlayReader;
 import baseball.game.util.GamePlayWriter;
-import camp.nextstep.edu.missionutils.Console;
 
 public class PlayService {
 
@@ -27,9 +27,8 @@ public class PlayService {
         } while (!gameResult.isThreeStrike());
     }
 
-    // TODO : input validation
     private GameResult play(Baseballs computer) {
-        PlayerCommand pCommand = new PlayerCommand(Console.readLine());
+        PlayerCommand pCommand = new PlayerCommand(GamePlayReader.readPlayerBaseballInput());
         Baseballs player = new Baseballs(pCommand.getFirst(), pCommand.getSecond(), pCommand.getThird());
 
         return GameResult.playAndGetGameResult(player, computer);

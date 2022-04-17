@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Baseballs {
 
+    public static final String VALID_BASEBALLS_REGEX = "^[1-9]{3}$";
+
     private static final int FIRST_POSITION = 1;
     private static final int SECOND_POSITION = 2;
     private static final int THIRD_POSITION = 3;

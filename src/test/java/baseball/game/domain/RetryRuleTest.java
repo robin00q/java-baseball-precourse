@@ -37,6 +37,6 @@ class RetryRuleTest {
         // when, then
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> RetryRule.findByRestartValue(invalidInput))
-                .withMessageMatching(RetryErrors.INVALID_RESTART_INPUT);
+                .withMessageStartingWith(RetryErrors.INVALID_RESTART_INPUT);
     }
 }
