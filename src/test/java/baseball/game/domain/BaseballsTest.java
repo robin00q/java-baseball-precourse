@@ -10,11 +10,28 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class BaseballsTest {
 
-    @ParameterizedTest(name = "Baseballs 객체 생성 위반")
+    @ParameterizedTest(name = "Baseballs 객체는 같은 숫자를 가진 공은 사용할 수 없다.")
+    @CsvSource(value = {
+            "1:1:2",
+            "1:2:1",
+            "2:1:1",
+            "1:1:1"
+    }, delimiter = ':')
+    void baseballs_cannot_have_same_number_ball(int ball1, int ball2, int ball3) {
+        // given: none
+
+        // when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Baseballs(ball1, ball2, ball3))
+                .withMessageMatching(BaseballErrors.INVALID_BASEBALLS_CANNOT_HAVE_SAME_NUMBER);
+    }
+
+    @ParameterizedTest(name = "Baseballs 객체 생성 위반 (1보다 작은 공이거나, 9보다 큰 공)")
     @MethodSource(value = "invalid_baseballs_creation_parameter")
     void invalid_baseballs_creation(int ball1, int ball2, int ball3) {
         // given: none
