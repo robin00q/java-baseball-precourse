@@ -29,7 +29,7 @@
 - 야구게임 도메인과 랜덤 생성 도메인은 서로 다른 라이프사이클을 가지므로, 이를 분리한다.
 - infra -> service -> domain 의 의존성을 지켜야하며, 역방향은 존재해서는 안된다.
 
-![img.png](png/layer_dependency_graph.png)
+![img_1.png](png/layer_dependency_graph.png)
 
 ## 4. 야구게임 도메인 내에서, 클래스간의 순환참조가 없도록 구현
 - GameResult -> Baseballs -> Baseball 객체간의 역방향의 참조는 없도록 구현한다.
