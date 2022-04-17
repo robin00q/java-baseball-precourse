@@ -25,7 +25,7 @@ public enum RetryRule {
             return DONE;
         }
         throw new IllegalArgumentException(RetryErrors.INVALID_RESTART_INPUT
-                + "재시도 : " + RESTART.restartValue
-                + "종료 : " + DONE.restartValue);
+                + " 재시도 : " + RESTART.restartValue
+                + " 종료 : " + DONE.restartValue);
     }
 }
