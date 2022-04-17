@@ -3,6 +3,7 @@ package baseball.generator.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import baseball.generator.errors.GeneratorErrors;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,8 +41,10 @@ class IntegerListGeneratorTest {
         int endInclusive = 1;
 
         // when, then
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> IntegerListGenerator.pickRandomUniqueNumbersInRangeWithCount(startInclusive, endInclusive, 1));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> IntegerListGenerator.pickRandomUniqueNumbersInRangeWithCount(
+                        startInclusive, endInclusive, 1))
+                .withMessageMatching(GeneratorErrors.START_NUMBER_CANNOT_BE_GREATER_THAN_END_NUMBER);
     }
 
     @DisplayName("endInclusive 와 startInclusive 사이의 숫자보다 더 많은 숫자를 생성하려 할 때")
@@ -53,36 +56,9 @@ class IntegerListGeneratorTest {
         int endInclusive = 9;
 
         // when, then
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> IntegerListGenerator.pickRandomUniqueNumbersInRangeWithCount(
-                        startInclusive, endInclusive, count));
-    }
-
-    @DisplayName("endInclusive 가 Integer.MAX_VALUE 일 때")
-    @Test
-    void endInclusive_larger_than_INTEGER_MAX_VALUE() {
-        // given
-        int startInclusive = 123;
-        int endInclusive = Integer.MAX_VALUE;
-        int count = 1;
-
-        // when, then
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> IntegerListGenerator.pickRandomUniqueNumbersInRangeWithCount(
-                        startInclusive, endInclusive, count));
-    }
-
-    @DisplayName("endInclusive - startInclusive 가 Integer.MAX_VALUE 보다 많을때")
-    @Test
-    void endInclusive_minus_startInclusive_larger_than_INTEGER_MAX_VALUE() {
-        // given
-        int startInclusive = -1;
-        int endInclusive = Integer.MAX_VALUE - 1;
-        int count = 1;
-
-        // when, then
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> IntegerListGenerator.pickRandomUniqueNumbersInRangeWithCount(
-                        startInclusive, endInclusive, count));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> IntegerListGenerator.pickRandomUniqueNumbersInRangeWithCount(
+                        startInclusive, endInclusive, count))
+                .withMessageMatching(GeneratorErrors.COUNT_CANNOT_BE_GREATER_BETWEEN_START_AND_END_NUMBER);
     }
 }

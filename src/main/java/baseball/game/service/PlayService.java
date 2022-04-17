@@ -4,7 +4,6 @@ import baseball.game.domain.Baseballs;
 import baseball.game.domain.GameResult;
 import baseball.game.domain.RetryRule;
 import baseball.game.external.dto.ComputerThreeRandomNumberResponse;
-import baseball.game.service.command.PlayerCommand;
 import baseball.game.util.GamePlayReader;
 import baseball.game.util.GamePlayWriter;
 
@@ -28,8 +27,12 @@ public class PlayService {
     }
 
     private GameResult play(Baseballs computer) {
-        PlayerCommand pCommand = new PlayerCommand(GamePlayReader.readPlayerBaseballInput());
-        Baseballs player = new Baseballs(pCommand.getFirst(), pCommand.getSecond(), pCommand.getThird());
+        String playerBaseballInput = GamePlayReader.readPlayerBaseballInput();
+
+        Baseballs player = new Baseballs(
+                Character.getNumericValue(playerBaseballInput.charAt(0)),
+                Character.getNumericValue(playerBaseballInput.charAt(1)),
+                Character.getNumericValue(playerBaseballInput.charAt(2)));
 
         return GameResult.playAndGetGameResult(player, computer);
     }
