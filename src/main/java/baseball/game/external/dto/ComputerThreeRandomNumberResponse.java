@@ -1,14 +1,12 @@
-package baseball.game.service.command;
+package baseball.game.external.dto;
 
-public class ComputerCommand {
+public class ComputerThreeRandomNumberResponse {
 
     private final int first;
-
     private final int second;
-
     private final int third;
 
-    public ComputerCommand(int first, int second, int third) {
+    public ComputerThreeRandomNumberResponse(int first, int second, int third) {
         this.first = first;
         this.second = second;
         this.third = third;
