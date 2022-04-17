@@ -31,8 +31,7 @@ public class Baseballs {
     public int getStrikeCount(Baseballs anotherBaseballs) {
         IncreasingInteger increasingInteger = IncreasingInteger.INITIAL_VALUE_ZERO;
 
-        for (int i = 0 ; i < baseballs.size() ; i++) {
-            Baseball baseball = baseballs.get(i);
+        for (Baseball baseball : baseballs) {
             increasingInteger = increasingInteger.increaseIfTrue(
                     baseball.isStrikeStatus(anotherBaseballs.getAllBaseballs()));
         }
@@ -43,8 +42,7 @@ public class Baseballs {
     public int getBallCount(Baseballs anotherBaseballs) {
         IncreasingInteger increasingInteger = IncreasingInteger.INITIAL_VALUE_ZERO;
 
-        for (int i = 0 ; i < baseballs.size() ; i++) {
-            Baseball baseball = baseballs.get(i);
+        for (Baseball baseball : baseballs) {
             increasingInteger = increasingInteger.increaseIfTrue(
                     baseball.isBallStatus(anotherBaseballs.getAllBaseballs()));
         }
