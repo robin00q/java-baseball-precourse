@@ -1,6 +1,7 @@
 package baseball.game.service.factory;
 
 import baseball.game.external.ComputerRequestThreeRandomNumberImpl;
+import baseball.game.external.dto.ComputerThreeRandomNumberResponse;
 import baseball.game.service.PlayService;
 
 /**
@@ -19,6 +20,10 @@ public class PlayServiceFactory {
      */
     public static PlayService getRandomNumberBaseballPlayService() {
         return new PlayService(new ComputerRequestThreeRandomNumberImpl());
+    }
+
+    public static PlayService fixedNumberBaseballPlayService() {
+        return new PlayService(() -> new ComputerThreeRandomNumberResponse(1, 2, 3));
     }
 
 }

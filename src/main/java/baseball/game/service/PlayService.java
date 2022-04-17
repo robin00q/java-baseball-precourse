@@ -2,6 +2,7 @@ package baseball.game.service;
 
 import baseball.game.domain.Baseballs;
 import baseball.game.domain.GameResult;
+import baseball.game.domain.RetryRule;
 import baseball.game.external.dto.ComputerThreeRandomNumberResponse;
 import baseball.game.service.command.PlayerCommand;
 import baseball.game.util.GamePlayWriter;
@@ -37,6 +38,10 @@ public class PlayService {
     private Baseballs getRandomNumberComputer() {
         ComputerThreeRandomNumberResponse response = computerRequestThreeRandomNumber.requestRandomNumber();
         return new Baseballs(response.getFirst(), response.getSecond(), response.getThird());
+    }
+
+    public static boolean isRestart(String restartInput) {
+        return RetryRule.RESTART == RetryRule.findByRestartValue(restartInput);
     }
 
 }
